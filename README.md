@@ -1,16 +1,25 @@
-# crud_app
+#  User Management App
 
-A new Flutter project.
+This Project basically design for  user management.
+Front-end using Dart , Flutter & backend using Hive Database.
 
-## Getting Started
 
-This project is a starting point for a Flutter application.
+## Other Common Github Profile Sections
+- 🔭 I’m currently working on [Profile-O](https://github.com/nitta02/profile_app)
 
-A few resources to get you started if this is your first Flutter project:
+- 🌱 I’m currently learning **Flutter, Kotlin**
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+- 👯 I’m looking to collaborate on [Quotes_App](https://github.com/nitta02/Quotes_App)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- 🤝 I’m looking for help with [Quotes_App](https://github.com/nitta02/Quotes_App)
+
+- 💬 Ask me about **Html,Css,JavaScript,Java,C,Python**
+
+- 📫 How to reach me **nittaranjantanmoy23@gmail.com**
+
+
+## Screenshots
+
+
+## GIF
+

@@ -13,6 +13,9 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  final nameController = TextEditingController();
+  final numberController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,15 +39,57 @@ class _MainScreenState extends State<MainScreen> {
               return Card(
                 color: Colors.white38,
                 elevation: 10.0,
-                margin: EdgeInsets.all(10.0),
+                margin: const EdgeInsets.all(10.0),
                 child: ListTile(
                   title: Text("Name : ${boxData[index].name}"),
                   iconColor: Colors.black,
                   isThreeLine: true,
-                  trailing: Icon(Icons.edit),
+                  trailing: InkWell(
+                    onTap: () {
+                      editData(
+                        boxData[index],
+                        boxData[index].name.toString(),
+                        boxData[index].contact.toString(),
+                      );
+                    },
+                    child: const Icon(Icons.edit),
+                  ),
                   subtitle: Text('Details : ${boxData[index].contact}'),
-                  leading: Icon(CupertinoIcons.person),
-                  onLongPress: () {},
+                  leading: const Icon(CupertinoIcons.person),
+                  onLongPress: () {
+                    showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          title: const Row(
+                            children: [
+                              Text('Are you sure?'),
+                              Icon(
+                                CupertinoIcons.delete,
+                                color: Colors.red,
+                              ),
+                            ],
+                          ),
+                          content: const Text('Delete this'),
+                          actions: [
+                            ElevatedButton(
+                              onPressed: () {
+                                boxData[index].delete();
+                                Navigator.pop(context);
+                              },
+                              child: const Text('Yes'),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                Navigator.pop(context);
+                              },
+                              child: const Text('No'),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                  },
                 ),
               );
             },
@@ -70,6 +115,77 @@ class _MainScreenState extends State<MainScreen> {
         tooltip: 'Click to add user',
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
+    );
+  }
+
+  Future<void> editData(
+      DatabaseModel databaseModel, String name, String details) async {
+    nameController.text = name;
+    numberController.text = details;
+
+    return showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: nameController,
+                  decoration: InputDecoration(
+                      hintText: 'name',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      )),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                TextFormField(
+                  controller: numberController,
+                  decoration: InputDecoration(
+                      hintText: 'Contact',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(8.0),
+                      )),
+                ),
+                const SizedBox(
+                  height: 40,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                        onPressed: () {
+                          databaseModel.name = nameController.text.toString();
+                          databaseModel.contact =
+                              numberController.text.toString();
+
+                          Navigator.pop(context);
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(CupertinoIcons.check_mark_circled),
+                            Text('Save Edit'),
+                          ],
+                        )),
+                    ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Row(
+                          children: [
+                            Icon(CupertinoIcons.delete_left),
+                            Text('Cancel'),
+                          ],
+                        ))
+                  ],
+                )
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
