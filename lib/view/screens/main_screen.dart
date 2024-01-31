@@ -1,6 +1,9 @@
+import 'package:crud_app/controller/database_controller.dart';
+import 'package:crud_app/model/user_model.dart';
 import 'package:crud_app/view/screens/add_user.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/adapters.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -21,6 +24,32 @@ class _MainScreenState extends State<MainScreen> {
             icon: const Icon(CupertinoIcons.person),
           )
         ],
+      ),
+      body: ValueListenableBuilder<Box<DatabaseModel>>(
+        valueListenable: DatabaseController.getData().listenable(),
+        builder: (context, value, child) {
+          var boxData = value.values.toList().cast<DatabaseModel>();
+
+          return ListView.builder(
+            itemCount: boxData.length,
+            itemBuilder: (context, index) {
+              return Card(
+                color: Colors.white38,
+                elevation: 10.0,
+                margin: EdgeInsets.all(10.0),
+                child: ListTile(
+                  title: Text("Name : ${boxData[index].name}"),
+                  iconColor: Colors.black,
+                  isThreeLine: true,
+                  trailing: Icon(Icons.edit),
+                  subtitle: Text('Details : ${boxData[index].contact}'),
+                  leading: Icon(CupertinoIcons.person),
+                  onLongPress: () {},
+                ),
+              );
+            },
+          );
+        },
       ),
       floatingActionButton: FloatingActionButton.extended(
         onPressed: () {
