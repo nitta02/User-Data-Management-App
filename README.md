@@ -18,8 +18,6 @@ Front-end using Dart , Flutter & backend using Hive Database.
 - 📫 How to reach me **nittaranjantanmoy23@gmail.com**
 
 
-## Screenshots
-
-
 ## GIF
 
+![User Save App](https://github.com/nitta02/User-Data-Management-App/assets/110607962/12ed71e2-4453-4bba-9692-e1c908a94529)
