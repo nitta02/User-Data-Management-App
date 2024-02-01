@@ -1,6 +1,7 @@
 import 'package:crud_app/controller/database_controller.dart';
 import 'package:crud_app/model/user_model.dart';
 import 'package:crud_app/view/screens/add_user.dart';
+import 'package:crud_app/view/screens/fav_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:hive_flutter/adapters.dart';
@@ -24,7 +25,11 @@ class _MainScreenState extends State<MainScreen> {
         actions: [
           IconButton(
             onPressed: () {
-             
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const FavoriteScreen(),
+                  ));
             },
             icon: const Icon(CupertinoIcons.person),
           )
@@ -63,7 +68,12 @@ class _MainScreenState extends State<MainScreen> {
                         ),
                       ),
                       InkWell(
-                        onTap: () {
+                        onTap: () async {
+                          // Save the new instance in the "favContacts" Hive box
+                          Hive.box<DatabaseModel>('favContacts').add(
+                              DatabaseModel(
+                                  name: boxData[index].name,
+                                  contact: boxData[index].contact));
                         },
                         child: const Icon(
                           Icons.favorite_border,
@@ -209,5 +219,4 @@ class _MainScreenState extends State<MainScreen> {
       },
     );
   }
-
 }

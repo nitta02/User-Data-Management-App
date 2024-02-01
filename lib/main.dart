@@ -12,6 +12,8 @@ void main() async {
   Hive.registerAdapter(DatabaseModelAdapter());
   await Hive.openBox<DatabaseModel>('userBox');
 
+  await Hive.openBox<DatabaseModel>('favContacts');
+
   runApp(const MyApp());
 }
 
@@ -23,11 +25,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        appBarTheme: AppBarTheme(
-          backgroundColor: Colors.blueAccent.shade400,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Color.fromRGBO(133, 133, 242, 0.494),
           elevation: 0.0,
         ),
-        scaffoldBackgroundColor: Colors.blueAccent.shade400,
+        scaffoldBackgroundColor: const Color.fromRGBO(133, 133, 242, 0.494),
         fontFamily: "Lexend",
       ),
       home: const MainScreen(),
