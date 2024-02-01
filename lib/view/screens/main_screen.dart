@@ -23,7 +23,9 @@ class _MainScreenState extends State<MainScreen> {
         title: const Text('User Add'),
         actions: [
           IconButton(
-            onPressed: () {},
+            onPressed: () {
+             
+            },
             icon: const Icon(CupertinoIcons.person),
           )
         ],
@@ -44,17 +46,33 @@ class _MainScreenState extends State<MainScreen> {
                   title: Text("Name : ${boxData[index].name}"),
                   iconColor: Colors.black,
                   isThreeLine: true,
-                  trailing: InkWell(
-                    onTap: () {
-                      editData(
-                        boxData[index],
-                        boxData[index].name.toString(),
-                        boxData[index].contact.toString(),
-                      );
-                    },
-                    child: const Icon(Icons.edit),
+                  trailing: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      InkWell(
+                        onTap: () {
+                          editData(
+                            boxData[index],
+                            boxData[index].name.toString(),
+                            boxData[index].contact.toString(),
+                          );
+                        },
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.black,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                        },
+                        child: const Icon(
+                          Icons.favorite_border,
+                          color: Colors.red,
+                        ),
+                      ),
+                    ],
                   ),
-                  subtitle: Text('Details : ${boxData[index].contact}'),
+                  subtitle: Text('Number : ${boxData[index].contact}'),
                   leading: const Icon(CupertinoIcons.person),
                   onLongPress: () {
                     showDialog(
@@ -107,7 +125,7 @@ class _MainScreenState extends State<MainScreen> {
         label: const Text('Add user'),
         icon: const Icon(CupertinoIcons.person),
         elevation: 0.0,
-        backgroundColor: Colors.teal.shade300,
+        backgroundColor: Colors.white38,
         shape: ContinuousRectangleBorder(
           borderRadius: BorderRadius.circular(15.0),
         ),
@@ -131,6 +149,7 @@ class _MainScreenState extends State<MainScreen> {
             child: Column(
               children: [
                 TextFormField(
+                  keyboardType: TextInputType.name,
                   controller: nameController,
                   decoration: InputDecoration(
                       hintText: 'name',
@@ -142,6 +161,7 @@ class _MainScreenState extends State<MainScreen> {
                   height: 20,
                 ),
                 TextFormField(
+                  keyboardType: TextInputType.number,
                   controller: numberController,
                   decoration: InputDecoration(
                       hintText: 'Contact',
@@ -161,6 +181,7 @@ class _MainScreenState extends State<MainScreen> {
                           databaseModel.contact =
                               numberController.text.toString();
 
+                          databaseModel.save();
                           Navigator.pop(context);
                         },
                         child: const Row(
@@ -188,4 +209,5 @@ class _MainScreenState extends State<MainScreen> {
       },
     );
   }
+
 }

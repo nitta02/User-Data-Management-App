@@ -3,4 +3,5 @@ import 'package:hive/hive.dart';
 
 class DatabaseController {
   static Box<DatabaseModel> getData() => Hive.box('userBox');
+  static Box<DatabaseModel> getfavData() => Hive.box('favContacts');
 }

@@ -27,6 +27,7 @@ class AddUserScreen extends StatelessWidget {
         child: Column(
           children: [
             TextFormField(
+              keyboardType: TextInputType.name,
               controller: nameController,
               decoration: InputDecoration(
                   hintText: 'Name',
@@ -39,6 +40,7 @@ class AddUserScreen extends StatelessWidget {
             ),
             TextFormField(
               controller: numberController,
+              keyboardType: TextInputType.number,
               decoration: InputDecoration(
                   hintText: 'Number',
                   border: OutlineInputBorder(
